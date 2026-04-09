@@ -1,5 +1,5 @@
 whisper:
-  model_size: medium.en
+  model_size: large-v3-turbo
   lang: Automatic Detection
   is_translate: false
   beam_size: 5
@@ -11,7 +11,7 @@ whisper:
   condition_on_previous_text: true
   prompt_reset_on_temperature: 0.5
   initial_prompt: null
-  temperature: 0.0
+  temperature: 0.8
   compression_ratio_threshold: 2.4
   length_penalty: 1.0
   repetition_penalty: 1.0
@@ -20,8 +20,8 @@ whisper:
   suppress_blank: true
   suppress_tokens: '[-1]'
   max_initial_timestamp: 1.0
-  word_timestamps: false
-  enable_whisperx_alignment: false
+  word_timestamps: true
+  enable_whisperx_alignment: true
   prepend_punctuations: '"''“¿([{-'
   append_punctuations: '"''.。,，!！?？:：”)]}、'
   max_new_tokens: null
@@ -34,8 +34,8 @@ whisper:
   whisperx_confidence_threshold: 0.0
   show_confidence: false
   enable_offload: true
-  add_timestamp: false
-  file_format: SRT
+  add_timestamp: true
+  file_format: txt
 vad:
   vad_filter: true
   threshold: 0.5
@@ -44,13 +44,13 @@ vad:
   min_silence_duration_ms: 2000
   speech_pad_ms: 400
 diarization:
-  is_diarize: false
+  is_diarize: true
   diarization_device: cuda
   compute_type: float32
-  hf_token: ''
-  use_whisperx_diarization: false
+  hf_token: 
+  use_whisperx_diarization: true
   assign_word_speakers: false
-  fill_nearest_speaker: false
+  fill_nearest_speaker: true
   enable_offload: true
 bgm_separation:
   is_separate_bgm: false

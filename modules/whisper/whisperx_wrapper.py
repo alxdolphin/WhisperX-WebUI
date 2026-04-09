@@ -9,6 +9,18 @@ import gradio as gr
 import numpy as np
 import torch
 
+# --- AGGRESSIVE PYTORCH 2.6 SECURITY OVERRIDE ---
+# Pyannote/Lightning ignores environment variables and safe_globals.
+# We must intercept torch.load and force weights_only=False globally.
+_original_torch_load = torch.load
+
+def _patched_torch_load(*args, **kwargs):
+    kwargs['weights_only'] = False
+    return _original_torch_load(*args, **kwargs)
+
+torch.load = _patched_torch_load
+# ------------------------------------------------
+
 from modules.diarize.diarize_pipeline import DiarizationPipeline, assign_word_speakers
 from modules.diarize.audio_loader import SAMPLE_RATE, load_audio
 from modules.utils.logger import get_logger
